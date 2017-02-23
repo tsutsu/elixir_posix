@@ -1,10 +1,10 @@
-defmodule PosixErrno.Mixfile do
+defmodule System.POSIX.Mixfile do
   use Mix.Project
 
   @version File.read!("VERSION")
 
   def project do [
-    app: :posix_errno,
+    app: :posix,
     version: @version,
     description: description(),
     package: package(),
@@ -18,7 +18,7 @@ defmodule PosixErrno.Mixfile do
 
   defp description do
     """
-    Gives your Elixir programs access to the build system's `errno.h` mappings.
+    Gives the Erlang Runtime System access to POSIX features of the build environment (currently, errno and sigaction.)
     """
   end
 
@@ -26,10 +26,11 @@ defmodule PosixErrno.Mixfile do
     licenses: ["MIT"],
     files: ["lib", "native", "mix.exs", "VERSION", "README*"],
     maintainers: ["Levi Aul"],
-    links: %{"GitHub" => "https://github.com/tsutsu/posix_errno"}
+    links: %{"GitHub" => "https://github.com/tsutsu/elixir_posix"}
   ] end
 
   def application do [
+    mod: {System.POSIX, []},
     extra_applications: [:logger]
   ] end
 
@@ -40,8 +41,8 @@ defmodule PosixErrno.Mixfile do
   ] end
 
   defp rustler_crates do [
-    posix_errno: [
-      path: "native/posix_errno",
+    posix: [
+      path: "native/posix",
       mode: (if Mix.env == :prod, do: :release, else: :debug)
     ]
   ] end

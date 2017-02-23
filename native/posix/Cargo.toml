@@ -1,10 +1,10 @@
 [package]
-name = "posix_errno"
+name = "posix"
 version = "0.1.0"
 authors = ["Levi Aul"]
 
 [lib]
-name = "posix_errno"
+name = "posix"
 path = "src/lib.rs"
 crate-type = ["dylib"]
 

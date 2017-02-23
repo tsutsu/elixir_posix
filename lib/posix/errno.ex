@@ -2,7 +2,7 @@ defmodule System.POSIX.Errno do
   @cache_table :posix_errno
   defstruct [:code, :name, :description]
 
-  alias System.POSIX.Errno.Impl
+  alias System.POSIX.Impl
 
   def errno(name) when is_atom(name) or is_binary(name) do
     ensure_cache_populated()
@@ -59,7 +59,7 @@ defmodule System.POSIX.Errno do
 
   defp scan do
     (1..65536)
-    |> Stream.map(&(Impl.probe(&1)))
+    |> Stream.map(&(Impl.errno_probe(&1)))
     |> Stream.filter(&is_tuple/1)
     |> Stream.map(fn({code, name, desc}) ->
       {canonicalize(name), code, desc}
