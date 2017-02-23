@@ -1,0 +1,15 @@
+[package]
+name = "posix_errno"
+version = "0.1.0"
+authors = ["Levi Aul"]
+
+[lib]
+name = "posix_errno"
+path = "src/lib.rs"
+crate-type = ["dylib"]
+
+[dependencies]
+rustler = "0.13.0"
+rustler_codegen = "0.13.0"
+lazy_static = "0.2"
+nix = "0.7.0"
