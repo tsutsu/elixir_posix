@@ -2,7 +2,7 @@ defmodule System.POSIX.Signal.GracefulShutdownHandler do
   use GenEvent
 
   # handle SIGTERM -- the default signal from kill(1)
-  def handle_event({:caught, :term}, state) do
+  def handle_event({:caught, :sigterm}, state) do
     :init.stop
     {:ok, state}
   end
