@@ -7,6 +7,7 @@ defmodule System.POSIX.Supervisor do
 
   def init(_) do
     children = [
+      worker(System.POSIX.Signal.EventListener, []),
       worker(System.POSIX.Signal.EventManager, [])
     ]
 

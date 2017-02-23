@@ -18,7 +18,6 @@ mod atoms {
     rustler_atoms! {
         atom undefined;
         atom ok;
-        atom notify;
         atom caught;
     }
 }
@@ -85,7 +84,7 @@ extern "C" fn signal_catch(code: nix::c_int) {
     };
 
     OwnedEnv::new().send_and_clear(&controller_pid, |env|
-        (atoms::notify(), (atoms::caught(), code)).encode(env)
+        (atoms::caught(), code).encode(env)
     );
 }
 
