@@ -3,7 +3,12 @@ defmodule System.POSIX.Signal.EventListener do
 
   alias System.POSIX.Signal
 
-  @default_overrides [:info, :winch, :term, :hup, :usr1, :usr2]
+  @os_overrides (case :os.type() do
+    {:unix, :darwin} -> [:info]
+    _                -> []
+  end)
+
+  @default_overrides [:winch, :term, :hup, :usr1, :usr2] ++ @os_overrides
 
   def start_link do
     GenServer.start_link(__MODULE__, [], name: __MODULE__)
